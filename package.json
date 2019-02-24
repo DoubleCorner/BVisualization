@@ -9,7 +9,11 @@
   "dependencies": {
     "vue": "^2.6.6",
     "vue-router": "^3.0.1",
-    "vuex": "^3.0.1"
+    "vuex": "^3.0.1",
+    "d3": "3.5.17",
+    "body-parser": "~1.16.0",
+    "express": "~4.14.1",
+    "mongodb": "~2.2.25"
   },
   "devDependencies": {
     "@vue/cli-service": "^3.4.0",
