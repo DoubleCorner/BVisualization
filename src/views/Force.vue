@@ -1,20 +1,101 @@
 <template>
   <div class="force">
+    <svg class="draw"></svg>
   </div>
 </template>
 
 <script>
+  import * as d3 from "d3";
 
   export default {
     name: 'Force',
+    data() {
+      return {
+        nodes: [],
+        links: []
+      }
+    },
+    mounted() {
+      this.axios.get('/api/networkData/stations').then(stations => {
+        this.stationInfo = stations.data;
+        this.indexStation = d3.map();
+        this.nodes = this.stationInfo.map((item, i) => {
+          this.indexStation.set(item.station_id, i);
+          return {
+            id: item.station_id,
+            name: item.station_name,
+            size: item.routes_number
+          }
+        });
+        this.axios.get('/api/networkData/sections').then(sections => {
+          this.sectionInfo = sections.data;
+          this.links = this.sectionInfo.map((item) => {
+            return {
+              source: this.indexStation.get(item.from_id),
+              target: this.indexStation.get(item.target_id)
+            }
+          });
+          this.drawForceGraph();
+        }).catch(error => console.log(error));
+      }).catch(error => console.log(error));
+    },
+    methods: {
+      drawForceGraph() {
+        const height = parseInt(d3.select('.force').style('height'));
+        const width = parseInt(d3.select('.force').style('width'));
+
+        const rScale = d3.scale.linear().domain(d3.extent(this.nodes, d => d.size)).range([2, 10]);
+        const svg = d3.select(".draw");
+
+        let force = d3.layout.force()
+          .nodes(this.nodes)
+          .links(this.links)
+          .size([width, height])
+          .linkDistance(20)
+          .charge([-8])
+          .start();
+
+        let svgLinks = svg.selectAll("line")
+          .data(this.links)
+          .enter()
+          .append("line")
+          .style("stroke", "#999999")
+          .style("stroke-opacity", 0.6);
+
+        let svgNodes = svg.selectAll("circle")
+          .data(this.nodes)
+          .enter()
+          .append("circle")
+          .attr("stroke", "#FFFFFF")
+          .attr("stroke-width", 0.5)
+          .attr("r", d => rScale(d.size))
+          .style("fill", "#1F77b4")
+          .call(force.drag);
+
+        force.on("tick", function () {
+          svgLinks.attr("x1", d => d.source.x);
+          svgLinks.attr("y1", d => d.source.y);
+          svgLinks.attr("x2", d => d.target.x);
+          svgLinks.attr("y2", d => d.target.y);
+          svgNodes.attr("cx", d => d.x);
+          svgNodes.attr("cy", d => d.y);
+        });
+      }
+    }
   }
 </script>
 
 <style scoped lang="less">
   .force {
-    background-color: #000000;
+    background-color: #FFFFFF;
     position: absolute;
     width: 100%;
     height: 100%;
+
+    .draw {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+    }
   }
 </style>

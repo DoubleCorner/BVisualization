@@ -1,12 +1,17 @@
-import Vue from 'vue'
-import App from './App.vue'
-import router from './router'
-import store from './store'
+import Vue from 'vue';
+import App from './App.vue';
+import router from './router';
+import store from './store';
+import 'leaflet/dist/leaflet.css';
+import axios from 'axios';
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
+Vue.prototype.axios = axios;
 
 new Vue({
   router,
   store,
-  render: function (h) { return h(App) }
-}).$mount('#app')
+  render: function (h) {
+    return h(App)
+  }
+}).$mount('#app');
