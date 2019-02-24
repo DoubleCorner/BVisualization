@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import * as d3 from "d3";
+  import * as d3 from 'd3';
 
   export default {
     name: 'Force',
@@ -45,7 +45,7 @@
         const width = parseInt(d3.select('.force').style('width'));
 
         const rScale = d3.scale.linear().domain(d3.extent(this.nodes, d => d.size)).range([2, 10]);
-        const svg = d3.select(".draw");
+        const svg = d3.select('.draw');
 
         let force = d3.layout.force()
           .nodes(this.nodes)
@@ -55,37 +55,37 @@
           .charge([-8])
           .start();
 
-        let svgLinks = svg.selectAll("line")
+        let svgLinks = svg.selectAll('line')
           .data(this.links)
           .enter()
-          .append("line")
-          .style("stroke", "#999999")
-          .style("stroke-opacity", 0.6);
+          .append('line')
+          .style('stroke', '#999999')
+          .style('stroke-opacity', 0.6);
 
-        let svgNodes = svg.selectAll("circle")
+        let svgNodes = svg.selectAll('circle')
           .data(this.nodes)
           .enter()
-          .append("circle")
-          .attr("stroke", "#FFFFFF")
-          .attr("stroke-width", 0.5)
-          .attr("r", d => rScale(d.size))
-          .style("fill", "#1F77b4")
+          .append('circle')
+          .attr('stroke', '#FFFFFF')
+          .attr('stroke-width', 0.5)
+          .attr('r', d => rScale(d.size))
+          .style('fill', '#1F77b4')
           .call(force.drag);
 
-        force.on("tick", function () {
-          svgLinks.attr("x1", d => d.source.x);
-          svgLinks.attr("y1", d => d.source.y);
-          svgLinks.attr("x2", d => d.target.x);
-          svgLinks.attr("y2", d => d.target.y);
-          svgNodes.attr("cx", d => d.x);
-          svgNodes.attr("cy", d => d.y);
+        force.on('tick', function () {
+          svgLinks.attr('x1', d => d.source.x);
+          svgLinks.attr('y1', d => d.source.y);
+          svgLinks.attr('x2', d => d.target.x);
+          svgLinks.attr('y2', d => d.target.y);
+          svgNodes.attr('cx', d => d.x);
+          svgNodes.attr('cy', d => d.y);
         });
       }
     }
   }
 </script>
 
-<style scoped lang="less">
+<style scoped lang='less'>
   .force {
     background-color: #FFFFFF;
     position: absolute;
