@@ -11,22 +11,19 @@
     </pre>
   </div>
 </template>
-
 <script>
-
-  export default {
-    name: 'Home',
-  }
+export default {
+  name: 'Home',
+}
 </script>
-
 <style scoped lang="less">
-  .home {
-    h1 {
-      margin-left: 10px;
-    }
-
-    pre {
-      font: 15px sans-serif
-    }
+.home {
+  h1 {
+    margin-left: 10px;
   }
+
+  pre {
+    font: 15px sans-serif
+  }
+}
 </style>

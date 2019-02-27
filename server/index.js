@@ -4,9 +4,9 @@ const bodyParser = require('body-parser');
 const express = require('express');
 const app = express();
 
-let networkData = require('./api/networkData');
-let stationRunData = require('./api/stationRunData');
-let sectionRunData = require('./api/sectionRunData');
+const networkData = require('./api/networkData');
+const stationRunData = require('./api/stationRunData');
+const sectionRunData = require('./api/sectionRunData');
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: false}));
