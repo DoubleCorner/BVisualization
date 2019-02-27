@@ -1,4 +1,4 @@
-# learn-vue-es6
+# BVisualization
 
 ## Project setup
 ```
