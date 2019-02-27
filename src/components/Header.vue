@@ -26,7 +26,7 @@ export default {
       day = day < 10 ? ('0' + day) : day;
       let hour = date.getHours();
       hour = hour < 10 ? ('0' + hour) : hour;
-      let minute = date.getminutes();
+      let minute = date.getMinutes();
       minute = minute < 10 ? ('0' + minute) : minute;
       this.nowTime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute;
     }
