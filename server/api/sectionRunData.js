@@ -17,14 +17,14 @@ router.get('/noRoute', (req, res) => {
     })
   });
   let sectionRunData = function (db, callback) {
-    let stationRun = db.collection("sectionRunData");
+    let sectionRun = db.collection("section_run_data");
     let aveSpeed = -1;
     let whereStr = {
       'section_id': parseInt(condition.sectionId),
       'end_date_time': {'$gte': start, '$lte': end},
       'speed': {'$lte': 60}
     };
-    stationRun.find(whereStr, {
+    sectionRun.find(whereStr, {
       'speed': 1,
       '_id': 0
     }).toArray((err, result) => {
@@ -32,9 +32,10 @@ router.get('/noRoute', (req, res) => {
         console.log('Error:' + err);
         return false;
       } else {
-        if (result.length !== 0) {
+        let len = result.length;
+        if (len) {
           aveSpeed = 0;
-          for (let i = 0, len = result.length; i !== len; ++i) {
+          for (let i = 0; i !== len; ++i) {
             aveSpeed += result[i].speed;
           }
           aveSpeed = (aveSpeed / len).toFixed(2);
@@ -62,7 +63,7 @@ router.get('/withRoute', function (req, res) {
     })
   });
   let sectionRunData = function (db, callback) {
-    let stationRun = db.collection("sectionRunData");
+    let sectionRun = db.collection("section_run_data");
     let aveSpeed = -1;
     let whereStr = {
       'sub_route_id': condition.subRouteId,
@@ -70,7 +71,7 @@ router.get('/withRoute', function (req, res) {
       'end_date_time': {'$gte': start, '$lte': end},
       'speed': {'$lte': 60}
     };
-    stationRun.find(whereStr, {
+    sectionRun.find(whereStr, {
       'speed': 1,
       '_id': 0
     }).toArray(function (err, result) {
@@ -78,9 +79,10 @@ router.get('/withRoute', function (req, res) {
         console.log('Error:' + err);
         return false;
       } else {
-        if (result.length !== 0) {
+        let len = result.length;
+        if (len) {
           aveSpeed = 0;
-          for (let i = 0, len = result.length; i !== len; ++i) {
+          for (let i = 0; i !== len; ++i) {
             aveSpeed += result[i].speed;
           }
           aveSpeed = (aveSpeed / len).toFixed(2);
@@ -103,12 +105,12 @@ router.get('/oneSection', function (req, res) {
     })
   });
   let sectionRunData = function (db, callback) {
-    let stationRun = db.collection("section_run_data");
+    let sectionRun = db.collection("section_run_data");
     let whereStr = {
       'section_id': parseInt(condition.sectionId),
       'speed': {'$lte': 60}
     };
-    stationRun.find(whereStr, {
+    sectionRun.find(whereStr, {
       'speed': 1,
       'end_date_time': 1,
       '_id': 0

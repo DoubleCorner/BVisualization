@@ -6,11 +6,11 @@
 </template>
 <script>
 export default {
-  name: 'Header',
+  name: "Header",
   data() {
     return {
-      nowTime: ''
-    }
+      nowTime: ""
+    };
   },
   mounted() {
     this.formatTime();
@@ -21,17 +21,17 @@ export default {
       let date = new Date();
       let year = date.getFullYear();
       let month = date.getMonth() + 1;
-      month = month < 10 ? ('0' + month) : month;
+      month = month < 10 ? "0" + month : month;
       let day = date.getDate();
-      day = day < 10 ? ('0' + day) : day;
+      day = day < 10 ? "0" + day : day;
       let hour = date.getHours();
-      hour = hour < 10 ? ('0' + hour) : hour;
+      hour = hour < 10 ? "0" + hour : hour;
       let minute = date.getMinutes();
-      minute = minute < 10 ? ('0' + minute) : minute;
-      this.nowTime = year + '-' + month + '-' + day + ' ' + hour + ':' + minute;
+      minute = minute < 10 ? "0" + minute : minute;
+      this.nowTime = year + "-" + month + "-" + day + " " + hour + ":" + minute;
     }
   }
-}
+};
 </script>
 <style scoped lang="less">
 .header {
@@ -40,12 +40,10 @@ export default {
   width: 100%;
   height: 20px;
   background-color: #646464;
-  color: #FFFFFF;
+  color: #ffffff;
   font-size: small;
   display: flex;
   justify-content: space-between;
-
-
 
   .title {
     margin-left: 10px;
