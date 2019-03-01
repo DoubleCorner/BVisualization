@@ -76,8 +76,6 @@
           svgNodes.attr('cx', d => d.x);
           svgNodes.attr('cy', d => d.y);
         });
-
-        let dataList = [];
       }
     }
   }
