@@ -21,6 +21,7 @@ import Important from "../components/Important";
 import StayTime from "../components/StayTime";
 import DayStayTime from "../components/DayStayTime";
 
+
 export default {
   name: "Traffic",
   components: {
