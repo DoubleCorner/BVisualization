@@ -16,14 +16,18 @@ router.get('/', (req, res) => {
     let stationRun = db.collection("stationRunData");
     let whereStr = {
       'station_id': condition.stationId,
-      'stay_time': {'$lt': 120}
+      'stay_time': {
+        '$lt': 120
+      }
     };
     stationRun.find(whereStr, {
       'route_id': 1,
       'end_date_time': 1,
       'stay_time': 1,
       '_id': 0
-    }).sort({'end_date_time': 1}).toArray((err, result) => {
+    }).sort({
+      'end_date_time': 1
+    }).toArray((err, result) => {
       if (err) {
         console.log('Error:' + err);
         return false;

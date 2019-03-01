@@ -13,8 +13,8 @@
 </template>
 <script>
 export default {
-  name: 'Home',
-}
+  name: "Home"
+};
 </script>
 <style scoped lang="less">
 .home {
@@ -23,7 +23,7 @@ export default {
   }
 
   pre {
-    font: 15px sans-serif
+    font: 15px sans-serif;
   }
 }
 </style>

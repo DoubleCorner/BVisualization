@@ -11,7 +11,9 @@ router.get('/sections', (req, res) => {
   });
   let sectionData = function (db, callback) {
     let section = db.collection('section');
-    section.find({}, {'_id': 0}).toArray((err, sectionResult) => {
+    section.find({}, {
+      '_id': 0
+    }).toArray((err, sectionResult) => {
       if (err) {
         console.log('Error:' + err);
         return false;
@@ -32,7 +34,10 @@ router.get('/stations', (req, res) => {
   });
   let stationData = function (db, callback) {
     let station = db.collection('station');
-    station.find({}, {'_id': 0, 'id': 0}).toArray((err, stationResult) => {
+    station.find({}, {
+      '_id': 0,
+      'id': 0
+    }).toArray((err, stationResult) => {
       if (err) {
         console.log('Error:' + err);
         return false;
@@ -53,7 +58,10 @@ router.get('/routes', (req, res) => {
   });
   let routeData = function (db, callback) {
     let allRoutes = db.collection('all_routes');
-    allRoutes.find({}, {'_id': 0, 'id': 0}).toArray((err, routeResult) => {
+    allRoutes.find({}, {
+      '_id': 0,
+      'id': 0
+    }).toArray((err, routeResult) => {
       if (err) {
         console.log('Error:' + err);
         return false;
@@ -74,7 +82,9 @@ router.get('/sign', (req, res) => {
   });
   let initData = function (db, callback) {
     let stationSign = db.collection('station_sign');
-    stationSign.find({}, {'_id': 0}).toArray((err, signResult) => {
+    stationSign.find({}, {
+      '_id': 0
+    }).toArray((err, signResult) => {
       if (err) {
         console.log('Error:' + err);
         return false;

@@ -1,13 +1,11 @@
 <template>
-  <div class="uncertainty">
-  </div>
+  <div class="uncertainty"></div>
 </template>
 
 <script>
-
-  export default {
-    name: 'Uncertainty',
-  }
+export default {
+  name: "Uncertainty"
+};
 </script>
 
 <style scoped lang="less">
