@@ -9,6 +9,7 @@ router.get('/sections', (req, res) => {
       db.close();
     })
   });
+
   let sectionData = function (db, callback) {
     let section = db.collection('section');
     section.find({}, {

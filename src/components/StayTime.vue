@@ -1,16 +1,15 @@
 <template>
-  <div class="stay-time">
-  </div>
+  <div class="stay-time"></div>
 </template>
 <script>
 export default {
-  name: 'StayTime',
+  name: "StayTime",
   data() {
-    return {}
+    return {};
   },
   mounted() {},
   methods: {}
-}
+};
 </script>
 <style scoped lang="less">
 .stay-time {
