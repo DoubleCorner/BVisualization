@@ -15,9 +15,7 @@
       };
     },
     mounted() {
-      this.axios
-        .get("/api/networkData/stations")
-        .then(stations => {
+      this.axios.get("/api/networkData/stations").then(stations => {
           this.stationInfo = stations.data;
           this.indexStation = d3.map();
           this.nodes = this.stationInfo.map((item, i) => {
@@ -28,9 +26,7 @@
               size: item.routes_number
             };
           });
-          this.axios
-            .get("/api/networkData/sections")
-            .then(sections => {
+          this.axios.get("/api/networkData/sections").then(sections => {
               this.sectionInfo = sections.data;
               this.links = this.sectionInfo.map(item => {
                 return {

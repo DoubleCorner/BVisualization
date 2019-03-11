@@ -19,8 +19,7 @@
       };
     },
     mounted() {
-      mapBoxGL.accessToken =
-        "pk.eyJ1IjoiY29ybmVyIiwiYSI6ImNqMHZ1NmM3bTAwMzYycXJzMmdmNjZ3am4ifQ.7oCzveSFDF1eSnm8QcdpXQ";
+      mapBoxGL.accessToken = "pk.eyJ1IjoiY29ybmVyIiwiYSI6ImNqMHZ1NmM3bTAwMzYycXJzMmdmNjZ3am4ifQ.7oCzveSFDF1eSnm8QcdpXQ";
       this.map = new mapBoxGL.Map({
         container: "map",
         style: "mapbox://styles/mapbox/light-v9",
@@ -32,40 +31,29 @@
         bearing: -17.6
       });
 
-      this.axios
-        .get("/api/networkData/stations")
-        .then(result => {
-          this.stationInfo = result.data;
-          this.axios
-            .get("/api/networkData/sections")
-            .then(result => {
-              this.sectionInfo = result.data;
-              this.sectionInfo.forEach(item => {
-                let path = JSON.parse(item.path).map(p => [p[1], p[0]]);
-                this.createSectionSpeedNoRoute(item.section_id, path);
-              });
-              this.axios
-                .get("/api/networkData/routes")
-                .then(result => {
-                  this.routesInfo = result.data;
-                })
-                .catch(error => console.log(error));
-            })
-            .catch(error => console.log(error));
-        })
-        .catch(error => console.log(error));
+      this.axios.get("/api/networkData/stations").then(result => {
+        this.stationInfo = result.data;
+        this.axios.get("/api/networkData/sections").then(result => {
+          this.sectionInfo = result.data;
+          this.sectionInfo.forEach(item => {
+            let path = JSON.parse(item.path).map(p => [p[1], p[0]]);
+            this.createSectionSpeedNoRoute(item.section_id, path);
+          });
+          this.axios.get("/api/networkData/routes").then(result => {
+            this.routesInfo = result.data;
+          }).catch(error => console.log(error));
+        }).catch(error => console.log(error));
+      }).catch(error => console.log(error));
     },
     methods: {
       createSectionSpeedNoRoute(sectionId, path) {
-        this.axios
-          .get("/api/sectionRunData/noRoute", {
+        this.axios.get("/api/sectionRunData/noRoute", {
             params: {
               sectionId: sectionId,
               startTime: this.timeExtent[0].getTime(),
               endTime: this.timeExtent[1].getTime()
             }
-          })
-          .then(aveSpeed => {
+          }).then(aveSpeed => {
             this.map.addLayer({
               id: "section" + sectionId,
               type: "line",
