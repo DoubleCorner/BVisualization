@@ -5,25 +5,25 @@
 </template>
 
 <script>
-  export default {
-    name: "Footer"
-  };
+export default {
+  name: "Footer"
+};
 </script>
 
 <style scoped lang="less">
-  .footer {
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    height: 20px;
-    background-color: #646464;
-    color: #ffffff;
-    font-size: small;
-    display: flex;
-    justify-content: flex-end;
+.footer {
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  height: 20px;
+  background-color: #646464;
+  color: #ffffff;
+  font-size: small;
+  display: flex;
+  justify-content: flex-end;
 
-    .copyright {
-      margin-right: 10px;
-    }
+  .copyright {
+    margin-right: 10px;
   }
+}
 </style>

@@ -3,9 +3,9 @@
 </template>
 
 <script>
-  export default {
-    name: "Uncertainty"
-  };
+export default {
+  name: "Uncertainty"
+};
 </script>
 
 <style scoped lang="less">
