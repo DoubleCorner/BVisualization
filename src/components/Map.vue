@@ -35,8 +35,10 @@
           {img: circleImg, title: 'select area by circle', selected: false, type: 'circle'},
           {img: rectImg, title: 'select area by rect', selected: false, type: 'rect'},
           {img: eraserImg, title: 'eraser the selected', selected: false, type: 'eraser'},
-          {img: sectionImg, title: 'all sections speed in one month', selected: true, type: 'section'},
-          {img: stationImg, title: 'all stations heat map', selected: false, type: 'station'}]
+          {img: sectionImg, title: 'all sections speed', selected: false, type: 'section'},
+          {img: stationImg, title: 'all stations heat map', selected: false, type: 'station'}],
+        networkShowFlag: false,
+        firstRequest: true
       };
     },
     mounted() {
@@ -55,25 +57,11 @@
       this.axios.get('/api/networkData/stations').then(result => {
         this.stationInfo = result.data;
         this.axios.get('/api/networkData/sections').then(result => {
-          //control layer by source
           this.map.addSource('sectionSource', {
             type: 'geojson',
             data: {
               type: 'FeatureCollection',
               features: []
-            }
-          });
-          this.map.addLayer({
-            id: 'sectionLayer',
-            type: 'line',
-            source: 'sectionSource',
-            layout: {
-              'line-join': 'round',
-              'line-cap': 'round'
-            },
-            paint: {
-              'line-color': ['get', 'color'],
-              'line-width': 3
             }
           });
           this.sectionInfo = result.data;
@@ -116,11 +104,35 @@
         this.toolImgList.forEach(item => item.selected = false);
         item.selected = true;
         switch (item.type) {
-          case 'section':{
-            this.sectionInfo.forEach(item => {
-              let path = JSON.parse(item.path).map(p => [p[1], p[0]]);
-              this.createSectionSpeedNoRoute(item.section_id, path);
-            });
+          case 'section': {
+            if (this.networkShowFlag) {
+              this.map.removeLayer('sectionLayer');
+              this.networkShowFlag = false;
+            } else {
+              //control layer by source
+              this.map.addLayer({
+                id: 'sectionLayer',
+                type: 'line',
+                source: 'sectionSource',
+                layout: {
+                  'line-join': 'round',
+                  'line-cap': 'round'
+                },
+                paint: {
+                  'line-color': ['get', 'color'],
+                  'line-width': 3
+                }
+              });
+              if (this.firstRequest) {
+                this.sectionInfo.forEach(item => {
+                  let path = JSON.parse(item.path).map(p => [p[1], p[0]]);
+                  this.createSectionSpeedNoRoute(item.section_id, path);
+                });
+                this.firstRequest = false;
+              }
+              this.networkShowFlag = true;
+            }
+
           }
         }
       }
