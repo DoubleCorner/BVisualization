@@ -1,6 +1,7 @@
 <template>
   <div class="force">
-    <svg class="draw"></svg>
+    <svg class="draw">
+    </svg>
   </div>
 </template>
 <script>
