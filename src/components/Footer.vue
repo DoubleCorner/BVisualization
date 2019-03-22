@@ -16,7 +16,7 @@
     bottom: 0;
     width: 100%;
     height: 20px;
-    background-color: #646464;
+    background-color: #000000;
     color: #ffffff;
     font-size: small;
     display: flex;
